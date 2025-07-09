@@ -1,0 +1,72 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: ncc-formation-backend
+  
+  datasource:
+    url: jdbc:h2:mem:nccdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  
+  sql:
+    init:
+      mode: never
+
+main:
+  allow-circular-references: true
+  
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# JWT Configuration
+jwt:
+  secret: ncc-formation-secret-key-2024-very-secure
+  expiration: 86400000 # 24 hours
+
+# CORS Configuration
+cors:
+  allowed-origins: 
+    - http://localhost:4200
+    - https://nccformation.netlify.app
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: "*"
+
+# Swagger Documentation
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+# Logging
+logging:
+  level:
+    com.nccformation: DEBUG
+    org.springframework.security: DEBUG
