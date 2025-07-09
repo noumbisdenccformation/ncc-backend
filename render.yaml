@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: ncc-backend
+    env: java
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/ncc-backend-1.0.0.jar
+    envVars:
+      - key: JAVA_TOOL_OPTIONS
+        value: -XX:MaxRAMPercentage=75.0
+      - key: SERVER_PORT
+        value: 8080
